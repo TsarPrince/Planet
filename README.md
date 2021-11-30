@@ -1,2 +1,2 @@
 # Planet
-gh-page simulating gravitaional feild
+gh-page simulating gravitaional field
