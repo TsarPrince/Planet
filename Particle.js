@@ -1,7 +1,8 @@
 const pathLimit = 200;
 const speed = 10000;
-const particleSize = 10;
-const colors = ['tomato', 'dodgerblue', 'mediumseagreen', 'magenta', 'orange', 'slateblue'];
+const particleSize = 5;
+// const colors = ['tomato', 'dodgerblue', 'mediumseagreen', 'magenta', 'orange', 'slateblue'];
+const colors = ['#ff6347', '#1e90ff', '#3cb371', '#ff00ff', '#ffa500', '#6a5acd'];
 
 class Particle {
     constructor(posX, posY, velocityX, velocityY, readyToLaunch = true) {
@@ -13,41 +14,43 @@ class Particle {
         this.readyToLaunch = readyToLaunch;
     }
     draw() {
-        ctx.fillStyle = this.color;
+        
         ctx.beginPath();
         ctx.arc(this.x, this.y, particleSize, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
         ctx.fill();
 
         // predict path
-        let next = { x: this.x, y: this.y };
-        let velocity = { x: this.vX, y: this.vY };
+        let nextPos = { x: this.x, y: this.y };
+        let nextVelocity = { x: this.vX, y: this.vY };
         ctx.beginPath();
-        ctx.strokeStyle = this.color;
         ctx.moveTo(this.x, this.y);
         for (let i = 0; i < pathLimit; i++) {
-            for (let planet of Planets) {
-                let x1 = next.x;
-                let y1 = next.y;
+            for (let planet of planets) {
+                let x1 = nextPos.x;
+                let y1 = nextPos.y;
                 let x2 = planet.x;
                 let y2 = planet.y;
                 let r = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
                 let theta = Math.atan2(y2 - y1, x2 - x1);
-                velocity.x += 1 / Math.pow(r, 2) * Math.cos(theta) * speed;
-                velocity.y += 1 / Math.pow(r, 2) * Math.sin(theta) * speed;
+                nextVelocity.x += 1 / Math.pow(r, 2) * Math.cos(theta) * speed;
+                nextVelocity.y += 1 / Math.pow(r, 2) * Math.sin(theta) * speed;
             }
 
-            next.x += velocity.x;
-            next.y += velocity.y;
-            ctx.lineTo(next.x, next.y);
-            ctx.stroke();
+            nextPos.x += nextVelocity.x;
+            nextPos.y += nextVelocity.y;
+            ctx.lineTo(nextPos.x, nextPos.y);
         }
+        // ctx.strokeStyle = this.color + "cc";        //strokeStyle = fillStyle + alpha = 0.8
+        ctx.strokeStyle = this.color;
+        ctx.stroke();
 
     }
     update() {
 
         if (this.readyToLaunch) {
 
-            for (let planet of Planets) {
+            for (let planet of planets) {
                 let x1 = this.x;
                 let y1 = this.y;
                 let x2 = planet.x;
