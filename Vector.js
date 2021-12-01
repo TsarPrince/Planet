@@ -15,7 +15,7 @@ class Vector {
     draw() {
         let hue = (Math.min(...this.distancesFromOtherPlanet) - 50) / Math.max(innerWidth/2, innerHeight/2) * 200;
         ctxf.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-        ctxf.fillStyle = `hsl(${hue}, 100%, 60%)`;
+        ctxf.fillStyle = `hsl(${hue}, 100%, 50%)`;
 
         ctxf.beginPath();
         ctxf.moveTo(this.x, this.y);

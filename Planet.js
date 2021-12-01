@@ -10,7 +10,7 @@ class Planet {
     }
 
     draw() {
-        ctx.fillStyle = '#384858';      // rgba(56, 72, 88, 1)
+        ctx.fillStyle = 'rgba(56, 72, 88)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fill();

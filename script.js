@@ -25,14 +25,25 @@ for (let i = -innerWidth / 2; i < innerWidth / 2; i += vectorSpacing) {
 	}
 }
 
+// 2 star system
 planets.push(new Planet(-innerWidth / 5, 0));
 planets.push(new Planet(innerWidth / 5, 0));
-planets.push(new Planet(0, innerWidth / 5));
-planets.push(new Planet(0, -innerWidth / 5));
+particles.push(new Particle(0, 0, 4.1, -4.5));
+
+// 3 star system
+// planets.push(new Planet(0, 100 * Math.sqrt(3)));
+// planets.push(new Planet(-200, -100 * Math.sqrt(3)));
+// planets.push(new Planet(200, -100 * Math.sqrt(3)));
 
 
-particles.push(new Particle(300, 300, 0, 0));
-particles.push(new Particle(-300, 300, 0, 0));
+// 4 star system
+// planets.push(new Planet(-innerWidth / 5, 0));
+// planets.push(new Planet(innerWidth / 5, 0));
+// planets.push(new Planet(0, innerWidth / 5));
+// planets.push(new Planet(0, -innerWidth / 5));
+// particles.push(new Particle(300, 300, 0, 0));
+// particles.push(new Particle(-300, 300, 0, 0));
+
 
 let movingPlanet = false;
 let creatingNewParticle = false;
@@ -122,7 +133,7 @@ function animate() {
 	
 	// drawDebugLines();
 	
-	if (movingPlanet) {
+	if (movingPlanet || shiftDown) {
 		ctxf.clearRect(-innerWidth / 2, -innerHeight / 2, innerWidth, innerHeight);
 		for (vector of vectors) {
 			vector.update();

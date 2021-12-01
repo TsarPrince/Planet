@@ -1,4 +1,4 @@
-const pathLimit = 200;
+const pathLimit = 300;
 const speed = 10000;
 const particleSize = 5;
 // const colors = ['tomato', 'dodgerblue', 'mediumseagreen', 'magenta', 'orange', 'slateblue'];
@@ -12,6 +12,7 @@ class Particle {
         this.vY = velocityY;
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.readyToLaunch = readyToLaunch;
+        this.firstTime = true;
     }
     draw() {
         
@@ -43,12 +44,18 @@ class Particle {
         }
         // ctx.strokeStyle = this.color + "cc";        //strokeStyle = fillStyle + alpha = 0.8
         ctx.strokeStyle = this.color;
+        ctx.lineWidth = 2;
         ctx.stroke();
 
     }
     update() {
 
         if (this.readyToLaunch) {
+
+            if (this.firstTime) {
+                console.log(this.x, this.y, this.vX, this.vY);
+                this.firstTime = false;
+            }
 
             for (let planet of planets) {
                 let x1 = this.x;
